@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import { decodeAll, packageStudentSafe } from '@/utils/crypto'
 import type { DecodedAll } from '@/utils/crypto'
+import FileInput from '@/components/FileInput.vue'
 
 type Tab = 'decode' | 'package'
 
@@ -231,6 +232,7 @@ function getFfrqItems(decoded: DecodedAll): FfrqItem[] {
       <p class="desc">Decode a student's submission and grade it using the quiz key.</p>
 
       <textarea v-model="decodeBlob" class="input-area" placeholder="Paste the student's encoded blob…" rows="6" spellcheck="false"></textarea>
+      <FileInput @loaded="decodeBlob = $event" />
 
       <input v-model="decodeKey" type="text" class="key-field" placeholder="Quiz key" spellcheck="false" />
 
@@ -300,6 +302,7 @@ function getFfrqItems(decoded: DecodedAll): FfrqItem[] {
       </p>
 
       <textarea v-model="packageJson" class="input-area" placeholder='{ "studentId": "...", "quizKey": "...", "problems": [...] }' rows="14" spellcheck="false"></textarea>
+      <FileInput @loaded="packageJson = $event" />
 
       <div v-if="packageError" class="err">{{ packageError }}</div>
 

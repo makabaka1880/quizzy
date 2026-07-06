@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { StudentProblemSet } from '@/types/quiz'
+import FileInput from '@/components/FileInput.vue'
 
 const emit = defineEmits<{
   start: [problems: StudentProblemSet]
@@ -63,6 +64,8 @@ function isStudentProblemSet(obj: unknown): obj is StudentProblemSet {
       rows="18"
       spellcheck="false"
     ></textarea>
+
+    <FileInput @loaded="rawInput = $event" />
 
     <div v-if="error" class="error">{{ error }}</div>
 
